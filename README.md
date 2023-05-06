@@ -4,8 +4,7 @@ With the growth of company's product usage and variaty, comes the need to deploy
   
 Having a single application monolith (frontend in this case), will force the entire application to be rebuilt or at least redeployed even for small minor changes.  
 
-Slicing it down to independant deployable chunks (microfrontend), 
-  
+Although it down to independant deployable chunks (i.e. microfrontend, remote modules, libraries etc.) is the main goal of this task, a proper desing and architecture can address a few predictable challanges, all described in the requirements section below.  
 
 
 ## Requirements
