@@ -1,17 +1,69 @@
 # Care In A Box
 
-With the growth of company's product usage and variaty, comes the need to deploy features more frequently and apply changes rapidly.  
- 
-Having a single application monolith (frontend in this case), will force the entire application to be rebuilt or at least redeployed even for small minor changes.  
+## Context 
 
-Thus, although creation an app with independant deployable chunks (i.e. microfrontend, remote modules, libraries etc.) is the main goal of this task, a proper desing and architecture can address a few predictable challanges, all described in the requirements section below.  
+With the growth of company's products usage and variaty, comes the need to deploy features more frequently and apply changes rapidly.  
+ 
+Having a single application monolith (frontend application in this case), will force the entire application to be rebuilt or at least redeployed even for small minor changes, scaling it further becomes extremely difficult.  
+
+Further more, graduatly evolving and expanding complicated B2B products, might lead over time to duplications, repeatitive work and unneccessary dependancies, which can be significantly reduced with a decent (reusable) abstraction layer.  
+
+## Micro-frontend
+
+Ideall, we'd like is to break the big monolithic application into smaller chunks and merged all together in some way to form one complete end user application.  
+
+### Advanteges  
+
+✓ Easier maintenance  
+✓ Increased acceleration  
+✓ Fast and easy scaling  
+✓ Work on different parts of the entire application in individual codebase   
+✓ Handling features independently along with independent releases    
+
+### Different Approaches  
+
+Some ways to solve the monolith issues, can be summarised into two main approaches.
+
+#### Packaging  
+
+Sharing code between applications using Node packages.
+
+Although this approach is the most common one, there are some disadvanteges coming with it:
+
+* Keeping up with the changes in latest versions in each of the published packages. That corresponds to increase time in updating to the changes, incompatibility resolutions, testing and deployment. 
+
+* Increases the size of application as more and more packages are added.
+
+#### CDN
+
+Another way to move away from the build time resolution to run time is to make each of the Micro-frontends deploy the JavaScript runtime packages to a CDN for consumption. The host application will then consume them and stitch at runtime.  
+
+* This requires custom logic to be written and handled by the framework, and it puts lot of dependency on the framework and as and when the framework pushes updates, refactoring might be required in the application.
+
+### Module Federation  
+
+To overcome all these issues, Micro-frontends using Module federation was created.
+
+Module federation makes it easy to share components and information between many frontend applications and also enables to build out whole pages and create a fully federated site.
+
+#### Advantages
+
+✓ Independent development by teams and dynamically import code from other applications at runtime. End results feels like an SPA.  
+✓ Independent testing and deployment/release strategies.  
+✓ Smaller and optimised bundle size of each micro app as shared components and dependencies are loaded only when required.  
+✓ Each of the micro app can choose their own tech stack and not bound by a particular framework.  
+
+
+Although the creation a modular app with independantly deployable chunks (i.e. microfrontend, remote modules, libraries etc.) is the main goal of this task, a few predictable challanges should be considered and addressed.  
+
+1. 
 
 
 ## Requirements
 
 - **Federated Modules** - App should contain a shell and 2 other remote modules, all are using some shared libraries.
 - **SSR** - App shell and modules should be pre rendered on server side (to exclude SPAs).
-- **Dynamic Module Route** - Routes values to import remote modules, should be fetched dynamically from a catlog (escaping the need redeploy for routes updates).
+- **Dynamic Module Route** - Routes values to import remote modules, should be fetched dynamically from a catalog (escaping the need redeploy for routes updates).
 - **Pipeline** - A CI/CD pipeline to build and deploy the app.
 - **Monorepo** - Combine all micro apps into a single repository, reducing possible versions conflicts and easying the usage of shared libraries.
 version handling?
@@ -38,6 +90,6 @@ For quick use, I've approached to have 3 apps:
 * Login - remote module representing a login form.
 * List - catalog service fetch(next/module).
 
-#### SRR 
+#### SSR 
 
 Although Angular has this great ability with [Angular Universal](https://angular.io/guide/universal), the new addition to [Nx](https://nx.dev/getting-started/intro) that provides SSR out of the box just by runnig a comman - made it more apeal to use, and the clear docs on their site to [set up Angular app with SSR and Module Federation](https://nx.dev/recipes/module-federation/module-federation-with-ssr), and [how make it dynamic](https://nx.dev/recipes/module-federation/dynamic-module-federation-with-angular). 
