@@ -24,7 +24,7 @@ Ideall, we'd like is to break the big monolithic application into smaller chunks
 
 Some ways to solve the monolith issues, can be summarised into two main approaches.
 
-#### Packaging  
+#### NPM  
 
 Sharing code between applications using Node packages.
 
@@ -42,8 +42,6 @@ Another way to move away from the build time resolution to run time is to make e
 
 ### Module Federation  
 
-To overcome all these issues, Micro-frontends using Module federation was created.
-
 Module federation makes it easy to share components and information between many frontend applications and also enables to build out whole pages and create a fully federated site.
 
 #### Advantages
@@ -55,8 +53,6 @@ Module federation makes it easy to share components and information between many
 
 
 Although the creation a modular app with independantly deployable chunks (i.e. microfrontend, remote modules, libraries etc.) is the main goal of this task, a few predictable challanges should be considered and addressed.  
-
-1. 
 
 
 ## Requirements
