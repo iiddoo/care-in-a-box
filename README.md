@@ -24,7 +24,7 @@ Ideall, we'd like is to break the big monolithic application into smaller chunks
 
 Some ways to solve the monolith issues, can be summarised into two main approaches.
 
-#### Packaging  
+#### NPM  
 
 Sharing code between applications using Node packages.
 
