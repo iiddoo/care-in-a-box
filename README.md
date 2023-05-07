@@ -51,14 +51,24 @@ Module federation makes it easy to share components and information between many
 ✓ Smaller and optimised bundle size of each micro app as shared components and dependencies are loaded only when required.  
 ✓ Each of the micro app can choose their own tech stack and not bound by a particular framework.  
 
+### Import maps
 
-Although the creation a modular app with independantly deployable chunks (i.e. microfrontend, remote modules, libraries etc.) is the main goal of this task, a few predictable challanges should be considered and addressed.  
+[`Just docs at the moment`](https://www.angulararchitects.io/aktuelles/import-maps-the-next-evolution-step-for-micro-frontends-article/)
+
+### Native Fedretion
+
+[`Just docs at the moment`](https://www.angulararchitects.io/aktuelles/announcing-native-federation-1-0/)
 
 
 ## Requirements
 
-- **Federated Modules** - App should contain a shell and 2 other remote modules, all are using some shared libraries.
-- **SSR** - App shell and modules should be pre rendered on server side (to exclude SPAs).
+Although the creation a modular app with independantly deployable chunks (i.e. microfrontend, remote modules, libraries etc.) is the main goal of this task, a few predictable challanges should be considered and addressed.  
+
+To demonstrate a good practical solution, the ideal one should follow this list:  
+
+1. **Federated Modules** - following the [advantages list above](https://github.com/iiddoo/care-in-a-box#Module-Federation), to demonstrate an app iimplementing Module Federation approach,  federated modules example pp should contain a shell and 2 other remote modules, all are using some shared libraries.   
+2. **Angular** - since the monolith already exists (written in Angular), rewriting huge and complex pieces of code or mixing other frameworks will take a very long and expensive time, basically unneccesary, because angular has a reach and well maintained [integration](https://www.angulararchitects.io/en/aktuelles/the-microfrontend-revolution-part-2-module-federation-with-angular/) with Webpack Module Federation.
+ **SSR** - App shell and modules should be pre rendered on server side (to exclude SPAs).
 - **Dynamic Module Route** - Routes values to import remote modules, should be fetched dynamically from a catalog (escaping the need redeploy for routes updates).
 - **Pipeline** - A CI/CD pipeline to build and deploy the app.
 - **Monorepo** - Combine all micro apps into a single repository, reducing possible versions conflicts and easying the usage of shared libraries.
