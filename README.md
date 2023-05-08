@@ -77,12 +77,20 @@ version handling?
 
 ### Run
 
-`npx nx serve-ssr store` to serve the application,  
+``` shell
+npx nx serve-ssr store
+```
+
+to serve the application,  
 *or* `npx nx serve-ssr store --devRemotes=checkout` to watch for changes in checkout module
 
 ### Understand this workspace
 
-Run `nx graph` to see a diagram of the dependencies of the projects.  
+To see a diagram of the dependencies of the projects, run:
+
+``` text
+nx graph
+```
 
 ### Solution  
 
@@ -98,25 +106,29 @@ For quick use, I've approached to have 3 apps:
 
 Although Angular has this great ability with [Angular Universal](https://angular.io/guide/universal), the new addition to [Nx](https://nx.dev/getting-started/intro) that provides SSR out of the box just by runnig a comman - made it more apeal to use, and the clear docs on their site to [set up Angular app with SSR and Module Federation](https://nx.dev/recipes/module-federation/module-federation-with-ssr), and [how make it dynamic](https://nx.dev/recipes/module-federation/dynamic-module-federation-with-angular).
 
-### New
+## New
 
-#### Setup
+### Setup and run
 
 Create workspace with Nx
 
-#### Serve
+>For this demo, the login user="**demo**" and password="**demo**"
+
+#### Run only login app
 
 ``` text
-For this demo, the login user="demo" and password="demo"
+nx run login:serve
 ```
 
-###### Run only login app
+and navigate to [http://localhost:4201/](http://localhost:4201/)
 
-`nx run login:serve` and navigate to [http://localhost:4201/](http://localhost:4201/)
+#### Run both dashboard host app and remote login app  
 
-###### Run both dashboard host app and remote login app  
+``` text
+nx serve dashboard --devRemotes=login
+```
 
-`nx serve dashboard --devRemotes=login` and navigate:
+and navigate:
 
 * Login - [http://localhost:4201/](http://localhost:4201/)
 * Dashboard - [http://localhost:4200/](http://localhost:4200/)
