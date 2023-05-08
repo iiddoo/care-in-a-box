@@ -106,6 +106,24 @@ Create workspace with Nx
 
 #### Serve
 
-Run the login app  
+``` text
+For this demo, the login user="demo" and password="demo"
+```
 
-`nx run login:serve`  
+###### Run only login app
+
+`nx run login:serve` and navigate to [http://localhost:4201/](http://localhost:4201/)
+
+###### Run both dashboard host app and remote login app  
+
+`nx serve dashboard --devRemotes=login` and navigate:
+
+* Login - [http://localhost:4201/](http://localhost:4201/)
+* Dashboard - [http://localhost:4200/](http://localhost:4200/)
+
+<hr/>
+
+### Known Issues
+
+* `import.meta cannot be used outside of a module`  
+When serving module federation apps in dev mode locally, there'll be an error output to the console, *import.meta cannot be used outside of a module*, and the script that is coming from is *styles.js*. It's a known error output, but it doesn't actually cause any breakages from as far as our testing has shown. It's because Angular compiler attaches the *styles.js* file to the index.html in a script tag with defer.
