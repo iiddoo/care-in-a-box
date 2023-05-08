@@ -164,7 +164,11 @@ App host and remote modules are up and running wirh SSR
 
 <hr/>
 
-### Known Issues
+## Known Issues
 
-* `import.meta cannot be used outside of a module`  
-When serving module federation apps in dev mode locally, there'll be an error output to the console, *import.meta cannot be used outside of a module*, and the script that is coming from is *styles.js*. It's a known error output, but it doesn't actually cause any breakages from as far as our testing has shown. It's because Angular compiler attaches the *styles.js* file to the index.html in a script tag with defer.
+### Missing module type
+
+###### Error: `import.meta cannot be used outside of a module`
+
+When serving module federation apps in dev mode locally, there'll be an error output to the console, *import.meta cannot be used outside of a module*, and the script that is coming from is *styles.js*.  
+It's a known error output, but it doesn't actually cause any breakages from as far as the testing has shown. It's because Angular compiler attaches the *styles.js* file to the index.html in a script tag with defer.
