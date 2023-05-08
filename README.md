@@ -102,16 +102,10 @@ Although Angular has this great ability with [Angular Universal](https://angular
 
 #### Setup
 
-Create workspace with Nx  
-
-`npx create-nx-workspace nx-workspace`
-
-Run within the Nx workspace:
-
-`npm install --save-dev @nx/angular`  
-
-`npx nx g @nx/angular:host store --ssr --remotes=product,checkout`
+Create workspace with Nx
 
 #### Serve
 
-`npx nx serve-ssr store`  
+Run the login app  
+
+`nx run login:serve`  
