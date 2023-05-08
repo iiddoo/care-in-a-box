@@ -110,13 +110,16 @@ Create workspace with Nx
 For this demo, the login user="demo" and password="demo"
 ```
 
-###### Run the login app
+###### Run only login app
 
 `nx run login:serve` and navigate to [http://localhost:4201/](http://localhost:4201/)
 
 ###### Run both dashboard host app and remote login app  
 
-`nx serve dashboard --devRemotes=login` and navigate to [http://localhost:4201/](http://localhost:4201/)
+`nx serve dashboard --devRemotes=login` and navigate:
+
+* Login - [http://localhost:4201/](http://localhost:4201/)
+* Dashboard - [http://localhost:4200/](http://localhost:4200/)
 
 <hr/>
 
