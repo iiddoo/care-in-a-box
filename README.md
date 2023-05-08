@@ -137,7 +137,7 @@ Run
 npx nx g @nx/angular:host dashboard --ssr --remotes=login,product,checkout
 ```
 
-Generating the remote modules one by one is also possible of course, by running  
+Adding a single remote module is also possible of course:  
 
 ``` javascript
 npx nx g @nx/angular:remote [name] --ssr --host=dashboard
