@@ -137,6 +137,12 @@ Run
 npx nx g @nx/angular:host dashboard --ssr --remotes=login,product,checkout
 ```
 
+Generating the remote modules one by one is also possible of course, by running  
+
+``` javascript
+npx nx g @nx/angular:remote [name] --ssr --host=dashboard
+```
+
 ### Adding User Data Library
 
 The user data-access library that will be shared between the host application and the remote application.  
