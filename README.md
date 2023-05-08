@@ -59,6 +59,8 @@ Module federation makes it easy to share components and information between many
 
 [`Just docs at the moment`](https://www.angulararchitects.io/aktuelles/announcing-native-federation-1-0/)
 
+<hr/>
+
 ## Requirements
 
 Although the creation a modular app with independantly deployable chunks (i.e. microfrontend, remote modules, libraries etc.) is the main goal of this task, a few predictable challanges should be considered and addressed.  
@@ -70,15 +72,15 @@ To demonstrate a good practical solution, the ideal one should follow this list:
 3. **SSR** - App shell and modules should be pre rendered on server side (to exclude SPAs).
 4. **Dynamic Module Route** - Routes values to import remote modules, should be fetched dynamically from a catalog (escaping the need redeploy for routes updates).
 5. **Pipeline** - A CI/CD pipeline to build and deploy the app.
-6. **Monorepo** - Combine all micro apps into a single repository, reducing possible versions conflicts and easying the usage of shared libraries.
-version handling?
+6. **Monorepo** - Combine all micro apps into a single repository, reducing possible versions conflicts and easying the usage of shared libraries.  
 
+* version handling?
 
+<hr/>
 
+## Solution  
 
-### Solution  
-
-#### Federated Modules
+### Federated Modules
 
 For quick use, I've approached to have 3 apps:
 
@@ -86,7 +88,7 @@ For quick use, I've approached to have 3 apps:
 * Login - remote module representing a login form.
 * List - catalog service fetch(next/module).
 
-#### SSR
+### SSR
 
 Although Angular has this great ability with [Angular Universal](https://angular.io/guide/universal), the new addition to [Nx](https://nx.dev/getting-started/intro) that provides SSR out of the box just by runnig a comman - made it more apeal to use, and the clear docs on their site to [set up Angular app with SSR and Module Federation](https://nx.dev/recipes/module-federation/module-federation-with-ssr), and [how make it dynamic](https://nx.dev/recipes/module-federation/dynamic-module-federation-with-angular).
 
