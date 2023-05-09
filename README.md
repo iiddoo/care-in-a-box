@@ -108,7 +108,7 @@ Select:
 
 ✔ Choose your style                                 · integrated
 ✔ What to create inside the new workspace           · apps
-✔ Repository name                                   · demo-app
+✔ Repository name                                   · nx-workspace
 ✔ Enable distributed caching to make your CI faster · No
 ```
 
@@ -119,7 +119,7 @@ Select:
 To see a diagram of the dependencies of the projects, run:
 
 ``` javascript
-npx nx graph
+nx graph
 ```
 
 ### Installing Angular framework plugin
@@ -130,20 +130,20 @@ Using Angular framework is ruquired. See more details in the [requirements secti
 npm install --save-dev @nx/angular
 ```
 
-### Generating the host and the remote applications with SSR
+### Generating the host (shell) application
 
 Creating a host application with another 3 remote applications, forming the required [Federated Modules structure](https://github.com/iiddoo/care-in-a-box#Requirements).  
 
 Using Nx featured generators, setting the generated applications to use the server for rendering matching the [SSR requirement](https://github.com/iiddoo/care-in-a-box#Requirements).  
 
 ``` javascript
-npx nx g @nx/angular:host dashboard --ssr --remotes=login,product,checkout
+nx g @nx/angular:host employee --ssr --dynamic
 ```
 
-Adding a single remote application is also possible of course:  
+### Adding Login remote application  
 
 ``` javascript
-npx nx g @nx/angular:remote [name] --ssr --host=dashboard
+nx g @nx/angular:remote login --host=employee --ssr
 ```
 
 ### Adding User Data Library
@@ -154,7 +154,7 @@ It's being used to determine if there is an authenticated user as well as provid
 This library demonstrate the usage of a shared resource withing the federated modules environment, centrelizing the logic to be consumed by other applications.  
 
 ``` javascript
-npx nx g @nx/angular:lib shared/data-access-user
+nx g @nx/angular:lib shared/data-access-user 
 ```
 
 ### Adding a User Service for foctionality
@@ -162,7 +162,7 @@ npx nx g @nx/angular:lib shared/data-access-user
 Creating an Angular Service that will be used to hold state.
 
 ``` javascript
-npx nx g @nx/angular:service user --project=shared-data-access-user
+nx g @nx/angular:service user --project=shared-data-access-user
 ```
 
 Addding some simple logic (missing error handling etc.), and setting defaults for demo:  
@@ -196,30 +196,29 @@ Finaly, adding a new export to the shared/data-access-user's index.ts file:
 export * from './lib/user.service';
 ```
 
-### Adding the Login Application
+### Adding another remote application
 
-First, adding `FormsModule` to the imports array in the `remote-entry/entry.module.ts` file:  
+``` javascript
+nx g @nx/angular:remote todo --host=employee --ssr 
+```  
 
-### Change Remotes to load dynamically
-
-
-### Serving the Dashboard Application and remotes
+### Serving the host and remotes applications
 
 Run
 
 ``` javascript
-npx nx serve-ssr dashboard
+nx serve-ssr employee --devRemotes=login,todo
 ```
 
 then open browser at [http://localhost:4200/](http://localhost:4200/)  
 
 See also:  
+  
+* login: [http://localhost:4201/](http://localhost:4201/),  
+* employee: [http://localhost:4202/](http://localhost:4202/),  
+* todo": [http://localhost:4203/](http://localhost:4203/)  
 
-* login: [http://localhost:4201/](http://localhost:4201/),
-* product: [http://localhost:4202/](http://localhost:4202/),
-* checkout": [http://localhost:4203/](http://localhost:4203/)  
-
-<img src="image1.png" width=500>  
+<img src="graph-2.png" width=500>  
 
 App host and remote applications are up and running with SSR  
 
@@ -229,7 +228,7 @@ App host and remote applications are up and running with SSR
 
 ### Missing module type
 
-###### Error: `import.meta cannot be used outside of a module`
+>Error: `import.meta cannot be used outside of a module`  
 
 When serving module federation apps in dev mode locally, there'll be an error output to the console, *import.meta cannot be used outside of a module*, and the script that is coming from is *styles.js*.  
 It's a known error output, but it doesn't actually cause any breakages from as far as the testing has shown. It's because Angular compiler attaches the *styles.js* file to the index.html in a script tag with defer.
