@@ -1,5 +1,0 @@
-{
-    "login": "http://localhost:4201",
-    "product": "http://localhost:4202",
-    "checkout": "http://localhost:4203"
-}
