@@ -81,13 +81,13 @@ To demonstrate a good practical solution, the ideal one should follow this list:
 
 ## Solution  
 
-### Federated Modules
+### Dynamic Federated Modules
 
 For quick use, I've approached to have 3 apps:
 
-* Dashboard - the shell app hosting the other modules. external catalog service
-* Login - remote module representing a login form.
-* List - catalog service fetch(next/module).
+* employee - the host (shell)
+* Login - remote shared
+* todo - remote
 
 ### SSR
 
@@ -221,6 +221,30 @@ See also:
 <img src="graph-2.png" width=500>  
 
 App host and remote applications are up and running with SSR  
+
+### Add Nx Angular plugin package
+
+``` javascript
+npm install -D @nx/angular
+```
+
+### Serving the host application
+
+``` javascript
+npx nx run employee:serve-ssr --port=4200 --skipRemotes=login,todo
+```
+
+## Serving login application
+
+``` javascript
+npx nx run login:serve-ssr --port=4041
+```
+
+## Serving todo application
+
+``` javascript
+npx nx run todo:serve-ssr --port=4042
+```
 
 <hr/>
 
