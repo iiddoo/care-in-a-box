@@ -52,10 +52,10 @@ jobs:
 
       - name: 'PR: Build application if affected by changes in feature branch'
         if: env.is-pull-request == 'true'
-        run: yarn affected:build
+        run: npx nx affected:build
       - name: 'Merge: Build application'
         if: env.is-merge == 'true'
-        run: yarn build
+        run: npx nx build
 
   lint:
     name: Lint
@@ -74,13 +74,13 @@ jobs:
         uses: ./.github/actions/setup-dependencies
 
       - name: Lint Nx workspace
-        run: yarn nx workspace-lint
+        run: npx nx workspace-lint
       - name: 'PR: Lint workspace and affected projects'
         if: env.is-pull-request == 'true'
-        run: yarn affected:lint
+        run: npx affected:lint
       - name: 'Merge: Lint workspace and all projects'
         if: env.is-merge == 'true'
-        run: yarn lint
+        run: npx lint
 
   test:
     name: Test
@@ -100,10 +100,10 @@ jobs:
 
       - name: 'PR: Test affected projects'
         if: env.is-pull-request == 'true'
-        run: yarn test
+        run: npx nx run test
       - name: 'Merge: Test all projects'
         if: env.is-merge == 'true'
-        run: yarn test
+        run: npx nx run test
 
   e2e:
     name: End-to-end test
@@ -125,7 +125,7 @@ jobs:
           'PR: End-to-end test application if affected by changes in feature
           branch'
         if: env.is-pull-request == 'true'
-        run: yarn affected:e2e --configuration=ci-production
+        run: npx nx affected:e2e --configuration=ci-production
       - name: 'Merge: End-to-end test application'
         if: env.is-merge == 'true'
         run: yarn e2e --configuration=ci-production
