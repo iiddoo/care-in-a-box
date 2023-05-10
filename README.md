@@ -14,11 +14,11 @@ Ideally, we'd like to break the big monolithic application into smaller chunks a
 
 #### Advantages  
 
-✅ Easier maintenance  
-✅ Increased acceleration.  
-✅ Fast and easy scaling.  
-✅ Work on different parts of the entire application in individual codebase.  
-✅ Handling features independently along with independent releases.  
+* Easier maintenance  
+* Increased acceleration.  
+* Fast and easy scaling.  
+* Work on different parts of the entire application in individual codebase.  
+* Handling features independently along with independent releases.  
 
 ### Different Approaches  
 
@@ -28,11 +28,11 @@ Some ways to solve the monolith issues, can be summarized into two main approach
 
 Sharing code between applications using Node packages.
 
-Although this approach is the most common one, there are some disadvantages coming with it:
+⚠️ Although this approach is the most common one, there are some disadvantages coming with it:
 
-⚠️ Keeping up with the changes in latest versions in each of the published packages. That corresponds to increase time in updating to the changes, incompatibility resolutions, testing and deployment.
+* Keeping up with the changes in latest versions in each of the published packages. That corresponds to increase time in updating to the changes, incompatibility resolutions, testing and deployment.
 
-⚠️ Increases the size of application as more and more packages are added.
+* Increases the size of application as more and more packages are added.
 
 #### CDN
 
@@ -46,10 +46,10 @@ Module federation makes it easy to share components and information between many
 
 ##### Advantages
 
-✅ Independent development by teams and dynamically import code from other applications at runtime. End results feels like an SPA.  
-✅ Independent testing and deployment/release strategies.  
-✅ Smaller and optimized bundle size of each micro app as shared components and dependencies are loaded only when required.  
-✅ Each of the micro app can choose their own tech stack and not bound by a particular framework.  
+* Independent development by teams and dynamically import code from other applications at runtime. End results feels like an SPA.  
+* Independent testing and deployment/release strategies.  
+* Smaller and optimized bundle size of each micro app as shared components and dependencies are loaded only when required.  
+* Each of the micro app can choose their own tech stack and not bound by a particular framework.  
 
 #### Import maps
 
@@ -73,9 +73,6 @@ To demonstrate a good practical solution, the ideal one should follow this list:
 4. **Dynamic Modules Routes** - Routes values to import remote modules, should be fetched dynamically from a catalog concept (escaping the need redeploy for routes updates, or have A/B serving ability for modules.
 5. **Pipeline** - A CI/CD pipeline to build and deploy the apps independently and update the catalog.  
 6. **Monorepo** - Combine all micro apps into a single repository, reducing possible versions conflicts and easing the usage of shared libraries.  
-
-* version handling?
-* why Nx
 
 <hr/>
 
