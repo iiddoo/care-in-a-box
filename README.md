@@ -14,11 +14,11 @@ Ideally, we'd like to break the big monolithic application into smaller chunks a
 
 #### Advanteges  
 
-✓ Easier maintenance  
-✓ Increased acceleration  
-✓ Fast and easy scaling  
-✓ Work on different parts of the entire application in individual codebase  
-✓ Handling features independently along with independent releases  
+✅ Easier maintenance  
+✅ Increased acceleration.  
+✅ Fast and easy scaling.  
+✅ Work on different parts of the entire application in individual codebase.  
+✅ Handling features independently along with independent releases.  
 
 ### Different Approaches  
 
@@ -30,15 +30,15 @@ Sharing code between applications using Node packages.
 
 Although this approach is the most common one, there are some disadvanteges coming with it:
 
-* Keeping up with the changes in latest versions in each of the published packages. That corresponds to increase time in updating to the changes, incompatibility resolutions, testing and deployment.
+⚠️ Keeping up with the changes in latest versions in each of the published packages. That corresponds to increase time in updating to the changes, incompatibility resolutions, testing and deployment.
 
-* Increases the size of application as more and more packages are added.
+⚠️ Increases the size of application as more and more packages are added.
 
 #### CDN
 
 Another way to move away from the build time resolution to run time is to make each of the Micro-frontends deploy the JavaScript runtime packages to a CDN for consumption. The host application will then consume them and stitch at runtime.  
 
-* This requires custom logic to be written and handled by the framework, and it puts lot of dependency on the framework and as and when the framework pushes updates, refactoring might be required in the application.
+⚠️ This requires custom logic to be written and handled by the framework, and it puts lot of dependency on the framework and as and when the framework pushes updates, refactoring might be required in the application.
 
 #### Module Federation
 
@@ -46,10 +46,10 @@ Module federation makes it easy to share components and information between many
 
 ##### Advantages
 
-✓ Independent development by teams and dynamically import code from other applications at runtime. End results feels like an SPA  
-✓ Independent testing and deployment/release strategies  
-✓ Smaller and optimised bundle size of each micro app as shared components and dependencies are loaded only when required  
-✓ Each of the micro app can choose their own tech stack and not bound by a particular framework  
+✅ Independent development by teams and dynamically import code from other applications at runtime. End results feels like an SPA.    
+✅ Independent testing and deployment/release strategies.  
+✅ Smaller and optimised bundle size of each micro app as shared components and dependencies are loaded only when required.  
+✅ Each of the micro app can choose their own tech stack and not bound by a particular framework.   
 
 #### Import maps
 
@@ -81,7 +81,12 @@ To demonstrate a good practical solution, the ideal one should follow this list:
 
 ## Solution  
 
-### Dynamic Federated Modules
+### Workspace and constractors
+
+Nx provides a reach veriaty of generators and executors, which some not natively provided by Angular CLI.  
+A deeper reseach should be done further, but for the most quick solution demo - Nx can boilerplate the required structure gracefuly.  
+
+#### Dynamic Federated Modules
 
 For quick use, I've approached to have 3 apps:
 
@@ -89,7 +94,7 @@ For quick use, I've approached to have 3 apps:
 * Login - remote shared
 * todo - remote
 
-### SSR
+#### SSR render
 
 Although Angular has this great ability with [Angular Universal](https://angular.io/guide/universal), the new addition to [Nx](https://nx.dev/getting-started/intro) that provides SSR out of the box just by runnig a comman - made it more apeal to use, and the clear docs on their site to [set up Angular app with SSR and Module Federation](https://nx.dev/recipes/module-federation/module-federation-with-ssr), and [how make it dynamic](https://nx.dev/recipes/module-federation/dynamic-module-federation-with-angular).
 
