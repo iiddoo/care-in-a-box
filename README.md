@@ -67,11 +67,11 @@ Although the creation a modular app with independantly deployable chunks (i.e. m
 
 To demonstrate a good practical solution, the ideal one should follow this list:  
 
-1. **Federated Modules** - following the [advantages list above](https://github.com/iiddoo/care-in-a-box#Module-Federation), to demonstrate an app iimplementing Module Federation approach,  federated modules example pp should contain a shell and 2 other remote modules, all are using some shared libraries.
-2. **Angular** - since the monolith already exists (written in Angular), rewriting huge and complex pieces of code or mixing other frameworks will take a very long and expensive time, basically unneccesary, because angular has a reach and well maintained [integration](https://www.angulararchitects.io/en/aktuelles/the-microfrontend-revolution-part-2-module-federation-with-angular/) with Webpack Module Federation.
-3. **SSR** - App shell and modules should be pre rendered on server side (to exclude SPAs).
-4. **Dynamic Module Route** - Routes values to import remote modules, should be fetched dynamically from a catalog (escaping the need redeploy for routes updates).
-5. **Pipeline** - A CI/CD pipeline to build and deploy the app.
+1. **Federated Modules** - Following the [advantages list above](https://github.com/iiddoo/care-in-a-box#Module-Federation), to demonstrate an app implementing Module Federation approach,  federated modules example should contain a shell and 2 other remote modules, plus a shared library module.  
+2. **Angular** - Since the monolith already exists (written in Angular), rewriting huge and complex pieces of code, migrating or mixing other frameworks will take a very long and expensive time, basically unneccesary, because angular has a reach and well maintained [integration](https://www.angulararchitects.io/en/aktuelles/the-microfrontend-revolution-part-2-module-federation-with-angular/) with Webpack Module Federation.  
+3. **SSR** - App shell and modules should be pre rendered on server side and not as SPAs, to improve perfomances and enable critical value of some SEO features and web crawlers.  
+4. **Dynamic Modules Routes** - Routes values to import remote modules, should be fetched dynamically from a catalog concept (escaping the need redeploy for routes updates, or have A/B serving ability for modules.
+5. **Pipeline** - A CI/CD pipeline to build and deploy the apps independtly and update the catalog.  
 6. **Monorepo** - Combine all micro apps into a single repository, reducing possible versions conflicts and easying the usage of shared libraries.  
 
 * version handling?
