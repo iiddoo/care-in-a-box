@@ -419,7 +419,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
         <!--  WELCOME  -->
         <div id="welcome">
           <h1>
-            B - Todo List 
+            New - Todo List 
           </h1>
         </div>
         <!--  COMMANDS  -->

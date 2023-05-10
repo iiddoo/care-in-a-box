@@ -5,7 +5,7 @@ import { UserService } from '@nx-workspace/shared/data-access-user';
   template: `
     <div class="login-app">
     <form class="login-form" (ngSubmit)="login()">
-    <h1>Login</h1>
+    <h1>Login New</h1>
     <div class="content">
     <div class="input-field">
     <input type="text" name="username" placeholder="Username" autocomplete="nope" [(ngModel)]="username" />
