@@ -81,12 +81,20 @@ To demonstrate a good practical solution, the ideal one should follow this list:
 
 ## Solution  
 
-### Workspace and constractors
+### Nx Workspace
 
 Nx provides a reach veriaty of generators and executors, which some not natively provided by Angular CLI.  
 A deeper reseach should be done further, but for the most quick solution demo - Nx can boilerplate the required structure gracefuly.  
 
-#### Dynamic Federated Modules
+#### Monorepo Structure
+
+#### Angular Integration
+
+#### Module Federation Generator
+
+#### Shared Library Cunstructor
+
+#### Dynamic Routing
 
 For quick use, I've approached to have 3 apps:
 
@@ -94,9 +102,12 @@ For quick use, I've approached to have 3 apps:
 * Login - remote shared
 * todo - remote
 
-#### SSR render
+#### SSR Serving
 
 Although Angular has this great ability with [Angular Universal](https://angular.io/guide/universal), the new addition to [Nx](https://nx.dev/getting-started/intro) that provides SSR out of the box just by runnig a comman - made it more apeal to use, and the clear docs on their site to [set up Angular app with SSR and Module Federation](https://nx.dev/recipes/module-federation/module-federation-with-ssr), and [how make it dynamic](https://nx.dev/recipes/module-federation/dynamic-module-federation-with-angular).
+
+#### Manifesting Routes
+
 
 <hr/>
 
