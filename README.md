@@ -2,17 +2,17 @@
 
 ## Context
 
-With the growth of company's products usage and variaty, comes the need to deploy features more frequently and apply changes rapidly.  
+With the growth of company's products usage and variety, comes the need to deploy features more frequently and apply changes rapidly.  
 
 Having a single application monolith (frontend application in this case), will force the entire application to be rebuilt or at least redeployed even for small minor changes, scaling it further becomes extremely difficult.  
 
-Further more, graduatly evolving and expanding complicated B2B products, might lead over time to duplications, repeatitive work and unneccessary dependancies, which can be significantly reduced with a decent (reusable) abstraction layer.  
+Further more, gradually evolving and expanding complicated B2B products, might lead over time to duplications, repetitive work and unnecessary dependancies, which can be significantly reduced with a decent (reusable) abstraction layer.  
 
 ### Micro-frontend
 
 Ideally, we'd like to break the big monolithic application into smaller chunks and merged all together in some way to form one complete end user application.  
 
-#### Advanteges  
+#### Advantages  
 
 ✅ Easier maintenance  
 ✅ Increased acceleration.  
@@ -22,13 +22,13 @@ Ideally, we'd like to break the big monolithic application into smaller chunks a
 
 ### Different Approaches  
 
-Some ways to solve the monolith issues, can be summarised into two main approaches.
+Some ways to solve the monolith issues, can be summarized into two main approaches.
 
 #### NPM  
 
 Sharing code between applications using Node packages.
 
-Although this approach is the most common one, there are some disadvanteges coming with it:
+Although this approach is the most common one, there are some disadvantages coming with it:
 
 ⚠️ Keeping up with the changes in latest versions in each of the published packages. That corresponds to increase time in updating to the changes, incompatibility resolutions, testing and deployment.
 
@@ -46,16 +46,16 @@ Module federation makes it easy to share components and information between many
 
 ##### Advantages
 
-✅ Independent development by teams and dynamically import code from other applications at runtime. End results feels like an SPA.    
+✅ Independent development by teams and dynamically import code from other applications at runtime. End results feels like an SPA.  
 ✅ Independent testing and deployment/release strategies.  
-✅ Smaller and optimised bundle size of each micro app as shared components and dependencies are loaded only when required.  
-✅ Each of the micro app can choose their own tech stack and not bound by a particular framework.   
+✅ Smaller and optimized bundle size of each micro app as shared components and dependencies are loaded only when required.  
+✅ Each of the micro app can choose their own tech stack and not bound by a particular framework.  
 
 #### Import maps
 
 [`Just docs at the moment`](https://www.angulararchitects.io/aktuelles/import-maps-the-next-evolution-step-for-micro-frontends-article/)
 
-#### Native Fedretion
+#### Native Federation
 
 [`Just docs at the moment`](https://www.angulararchitects.io/aktuelles/announcing-native-federation-1-0/)
 
@@ -63,16 +63,16 @@ Module federation makes it easy to share components and information between many
 
 ## Requirements
 
-Although the creation a modular app with independantly deployable chunks (i.e. microfrontend, remote modules, libraries etc.) is the main goal of this task, a few predictable challanges should be considered and addressed.  
+Although the creation a modular app with independently deployable chunks (i.e. micro-frontend, remote modules, libraries etc.) is the main goal of this task, a few predictable challenges should be considered and addressed.  
 
 To demonstrate a good practical solution, the ideal one should follow this list:  
 
 1. **Federated Modules** - Following the [advantages list above](https://github.com/iiddoo/care-in-a-box#Module-Federation), to demonstrate an app implementing Module Federation approach,  federated modules example should contain a shell and 2 other remote modules, plus a shared library module.  
-2. **Angular** - Since the monolith already exists (written in Angular), rewriting huge and complex pieces of code, migrating or mixing other frameworks will take a very long and expensive time, basically unneccesary, because angular has a reach and well maintained [integration](https://www.angulararchitects.io/en/aktuelles/the-microfrontend-revolution-part-2-module-federation-with-angular/) with Webpack Module Federation.  
-3. **SSR** - App shell and modules should be pre rendered on server side and not as SPAs, to improve perfomances and enable critical value of some SEO features and web crawlers.  
+2. **Angular** - Since the monolith already exists (written in Angular), rewriting huge and complex pieces of code, migrating or mixing other frameworks will take a very long and expensive time, basically unnecessary, because angular has a reach and well maintained [integration](https://www.angulararchitects.io/en/aktuelles/the-microfrontend-revolution-part-2-module-federation-with-angular/) with Webpack Module Federation.  
+3. **SSR** - App shell and modules should be pre rendered on server side and not as SPAs, to improve performances and enable critical value of some SEO features and web crawlers.  
 4. **Dynamic Modules Routes** - Routes values to import remote modules, should be fetched dynamically from a catalog concept (escaping the need redeploy for routes updates, or have A/B serving ability for modules.
-5. **Pipeline** - A CI/CD pipeline to build and deploy the apps independtly and update the catalog.  
-6. **Monorepo** - Combine all micro apps into a single repository, reducing possible versions conflicts and easying the usage of shared libraries.  
+5. **Pipeline** - A CI/CD pipeline to build and deploy the apps independently and update the catalog.  
+6. **Monorepo** - Combine all micro apps into a single repository, reducing possible versions conflicts and easing the usage of shared libraries.  
 
 * version handling?
 * why Nx
@@ -99,31 +99,65 @@ Shared Library
 
 ### Nx Workspace
 
-Nx provides a reach veriaty of generators and executors, which some not natively provided by Angular CLI.  
-A deeper reseach should be done further, but for the most quick solution demo - Nx can boilerplate the required structure gracefuly.  
+Nx provides a reach variety of generators and executors, which some not natively provided by Angular CLI.  
+A deeper research should be done further, but for the most quick solution demo - [Nx](https://nx.dev) can boilerplate the required structure gracefully.  
 
 #### Monorepo Structure
 
+``` text
+npx create-nx-workspace@latest
+
+Select:
+
+✔ Choose your style                                 · integrated
+✔ What to create inside the new workspace           · apps
+✔ Repository name                                   · nx-workspace
+✔ Enable distributed caching to make your CI faster · No
+```
+
 #### Angular Integration
+
+Installing Angular framework plugin:  
+
+``` javascript
+npm install --save-dev @nx/angular
+```
 
 #### Module Federation Generator
 
-#### Shared Library Cunstructor
+Adding Login remote application:  
+
+``` javascript
+nx g @nx/angular:remote login --host=employee --ssr
+```
+
+#### Shared Library Constructor
+
+Create a library shared between the host application and the remote applications:  
+
+``` javascript
+nx g @nx/angular:lib shared/data-access-user 
+```
 
 #### Dynamic Routing
 
-For quick use, I've approached to have 3 apps:
+Creating a host application for dynamic remote modules
 
-* employee - the host (shell)
-* Login - remote shared
-* todo - remote
+``` javascript
+nx g @nx/angular:host employee --ssr --dynamic
+```
 
-#### SSR Serving
+#### SSR Support
 
-Although Angular has this great ability with [Angular Universal](https://angular.io/guide/universal), the new addition to [Nx](https://nx.dev/getting-started/intro) that provides SSR out of the box just by runnig a comman - made it more apeal to use, and the clear docs on their site to [set up Angular app with SSR and Module Federation](https://nx.dev/recipes/module-federation/module-federation-with-ssr), and [how make it dynamic](https://nx.dev/recipes/module-federation/dynamic-module-federation-with-angular).
+Although Angular has this great ability with [Angular Universal](https://angular.io/guide/universal), the new addition to [Nx](https://nx.dev/getting-started/intro) that provides SSR out of the box just by running a command - made it more appeal to use, and the clear docs on their site to [set up Angular app with SSR and Module Federation](https://nx.dev/recipes/module-federation/module-federation-with-ssr), and [how make it dynamic](https://nx.dev/recipes/module-federation/dynamic-module-federation-with-angular).  
+
+Serving applications with SSR:  
+
+``` javascript
+nx serve-ssr employee
+```
 
 #### Manifesting Routes
-
 
 <hr/>
 
@@ -156,7 +190,7 @@ nx graph
 
 ### Installing Angular framework plugin
 
-Using Angular framework is ruquired. See more details in the [requirements section](https://github.com/iiddoo/care-in-a-box#Requirements).
+Using Angular framework is required. See more details in the [requirements section](https://github.com/iiddoo/care-in-a-box#Requirements).
 
 ``` javascript
 npm install --save-dev @nx/angular
@@ -183,13 +217,13 @@ nx g @nx/angular:remote login --host=employee --ssr
 The user data-access library shared between the host application (dashboard) and the remote applications.  
 It's being used to determine if there is an authenticated user as well as providing logic for authenticating the user.  
 
-This library demonstrate the usage of a shared resource withing the federated modules environment, centrelizing the logic to be consumed by other applications.  
+This library demonstrate the usage of a shared resource within the federated modules environment, centralizing the logic to be consumed by other applications.  
 
 ``` javascript
 nx g @nx/angular:lib shared/data-access-user 
 ```
 
-### Adding a User Service for foctionality
+### Adding a User Service for fictionality
 
 Creating an Angular Service that will be used to hold state.
 
@@ -197,7 +231,7 @@ Creating an Angular Service that will be used to hold state.
 nx g @nx/angular:service user --project=shared-data-access-user
 ```
 
-Addding some simple logic (missing error handling etc.), and setting defaults for demo:  
+Adding some simple logic (missing error handling etc.), and setting defaults for demo:  
 
 ``` typescript
 import { Injectable } from '@angular/core';
@@ -222,7 +256,7 @@ export class UserService {
 >Username = "**care**"  
 >Password = "**box**"  
 
-Finaly, adding a new export to the shared/data-access-user's index.ts file:
+Finally, adding a new export to the shared/data-access-user's index.ts file:
 
 ``` typescript
 export * from './lib/user.service';
@@ -287,4 +321,4 @@ npx nx run todo:serve-ssr --port=4042
 >Error: `import.meta cannot be used outside of a module`  
 
 When serving module federation apps in dev mode locally, there'll be an error output to the console, *import.meta cannot be used outside of a module*, and the script that is coming from is *styles.js*.  
-It's a known error output, but it doesn't actually cause any breakages from as far as the testing has shown. It's because Angular compiler attaches the *styles.js* file to the index.html in a script tag with defer.
+It's a known error output, but it doesn't actually cause any breakages from as far as the testing has shown. It's because Angular compiler attaches the *styles.js* file to the index.html in a script tag with defer.  
