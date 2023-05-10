@@ -12,7 +12,7 @@ Further more, graduatly evolving and expanding complicated B2B products, might l
 
 Ideally, we'd like to break the big monolithic application into smaller chunks and merged all together in some way to form one complete end user application.  
 
-### Advanteges  
+#### Advanteges  
 
 ✓ Easier maintenance  
 ✓ Increased acceleration  
@@ -20,11 +20,11 @@ Ideally, we'd like to break the big monolithic application into smaller chunks a
 ✓ Work on different parts of the entire application in individual codebase
 ✓ Handling features independently along with independent releases
 
-### Different Approaches  
+#### Different Approaches  
 
 Some ways to solve the monolith issues, can be summarised into two main approaches.
 
-#### NPM  
+##### NPM  
 
 Sharing code between applications using Node packages.
 
@@ -34,13 +34,13 @@ Although this approach is the most common one, there are some disadvanteges comi
 
 * Increases the size of application as more and more packages are added.
 
-#### CDN
+##### CDN
 
 Another way to move away from the build time resolution to run time is to make each of the Micro-frontends deploy the JavaScript runtime packages to a CDN for consumption. The host application will then consume them and stitch at runtime.  
 
 * This requires custom logic to be written and handled by the framework, and it puts lot of dependency on the framework and as and when the framework pushes updates, refactoring might be required in the application.
 
-### Module Federation  
+### Module Federation approach
 
 Module federation makes it easy to share components and information between many frontend applications and also enables to build out whole pages and create a fully federated site.
 
