@@ -79,7 +79,23 @@ To demonstrate a good practical solution, the ideal one should follow this list:
 
 <hr/>
 
-## Solution  
+## Strategy
+
+### Architecture
+
+#### Applications
+
+Employee  
+Host Module  
+
+Login  
+Remote Module
+
+Todo  
+Remote Module  
+
+User  
+Shared Library  
 
 ### Nx Workspace
 
