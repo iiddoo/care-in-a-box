@@ -8,7 +8,7 @@ Having a single application monolith (frontend application in this case), will f
 
 Further more, graduatly evolving and expanding complicated B2B products, might lead over time to duplications, repeatitive work and unneccessary dependancies, which can be significantly reduced with a decent (reusable) abstraction layer.  
 
-## Micro-frontend
+### Micro-frontend
 
 Ideally, we'd like to break the big monolithic application into smaller chunks and merged all together in some way to form one complete end user application.  
 
