@@ -82,17 +82,22 @@ To demonstrate a good practical solution, the ideal one should follow this list:
 
 #### Applications
 
-Employee  
-Host Module  
+**Employee**  
+*Host Module*  
 
-Login  
-Remote Module
+**Login**  
+*Remote Module*
 
-Todo  
-Remote Module  
+**Todo**  
+*Remote Module*  
 
-User  
-Shared Library  
+**User Data**  
+*Shared Library*  
+
+The user data-access library shared between the host application (dashboard) and the remote applications.  
+It's being used to determine if there is an authenticated user as well as providing logic for authenticating the user.  
+
+This library demonstrate the usage of a shared resource within the federated modules environment, centralizing the logic to be consumed by other applications.  
 
 ### Nx Workspace
 
