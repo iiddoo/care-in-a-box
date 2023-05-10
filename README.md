@@ -17,14 +17,14 @@ Ideally, we'd like to break the big monolithic application into smaller chunks a
 ✓ Easier maintenance  
 ✓ Increased acceleration  
 ✓ Fast and easy scaling  
-✓ Work on different parts of the entire application in individual codebase
-✓ Handling features independently along with independent releases
+✓ Work on different parts of the entire application in individual codebase  
+✓ Handling features independently along with independent releases  
 
-#### Different Approaches  
+### Different Approaches  
 
 Some ways to solve the monolith issues, can be summarised into two main approaches.
 
-##### NPM  
+#### NPM  
 
 Sharing code between applications using Node packages.
 
@@ -34,28 +34,28 @@ Although this approach is the most common one, there are some disadvanteges comi
 
 * Increases the size of application as more and more packages are added.
 
-##### CDN
+#### CDN
 
 Another way to move away from the build time resolution to run time is to make each of the Micro-frontends deploy the JavaScript runtime packages to a CDN for consumption. The host application will then consume them and stitch at runtime.  
 
 * This requires custom logic to be written and handled by the framework, and it puts lot of dependency on the framework and as and when the framework pushes updates, refactoring might be required in the application.
 
-### Module Federation approach
+#### Module Federation
 
 Module federation makes it easy to share components and information between many frontend applications and also enables to build out whole pages and create a fully federated site.
 
-#### Advantages
+##### Advantages
 
-✓ Independent development by teams and dynamically import code from other applications at runtime. End results feels like an SPA.  
-✓ Independent testing and deployment/release strategies.  
-✓ Smaller and optimised bundle size of each micro app as shared components and dependencies are loaded only when required.  
-✓ Each of the micro app can choose their own tech stack and not bound by a particular framework.  
+✓ Independent development by teams and dynamically import code from other applications at runtime. End results feels like an SPA  
+✓ Independent testing and deployment/release strategies  
+✓ Smaller and optimised bundle size of each micro app as shared components and dependencies are loaded only when required  
+✓ Each of the micro app can choose their own tech stack and not bound by a particular framework  
 
-### Import maps
+#### Import maps
 
 [`Just docs at the moment`](https://www.angulararchitects.io/aktuelles/import-maps-the-next-evolution-step-for-micro-frontends-article/)
 
-### Native Fedretion
+#### Native Fedretion
 
 [`Just docs at the moment`](https://www.angulararchitects.io/aktuelles/announcing-native-federation-1-0/)
 
