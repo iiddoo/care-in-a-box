@@ -1,0 +1,6 @@
+{
+  "login": "http://localhost:4204",
+  "projects": "http://localhost:4205",
+  "categories": "http://localhost:4206",
+  "search": "http://localhost:4207"
+}
