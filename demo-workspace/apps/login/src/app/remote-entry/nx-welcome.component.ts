@@ -420,7 +420,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
         <div id="welcome">
           <h1>
             <span> 🔑 </span>
-            Login
+            Login New
           </h1>
         </div>
       </div>

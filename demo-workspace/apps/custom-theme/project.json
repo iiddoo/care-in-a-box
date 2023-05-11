@@ -1,0 +1,188 @@
+{
+  "name": "custom-theme",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "demo-workspace",
+  "sourceRoot": "apps/custom-theme/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/custom-theme/browser",
+        "index": "apps/custom-theme/src/index.html",
+        "main": "apps/custom-theme/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/custom-theme/tsconfig.app.json",
+        "assets": [
+          "apps/custom-theme/src/favicon.ico",
+          "apps/custom-theme/src/assets"
+        ],
+        "styles": ["apps/custom-theme/src/styles.css"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/custom-theme/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/custom-theme/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nx/angular:webpack-dev-server",
+      "options": {
+        "port": 4208,
+        "publicHost": "http://localhost:4208"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "custom-theme:build:production"
+        },
+        "development": {
+          "browserTarget": "custom-theme:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "custom-theme:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/custom-theme/**/*.ts",
+          "apps/custom-theme/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/custom-theme/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "custom-theme:build",
+        "port": 4208,
+        "watch": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "custom-theme:build:development"
+        },
+        "production": {
+          "buildTarget": "custom-theme:build:production"
+        }
+      }
+    },
+    "server": {
+      "dependsOn": ["build"],
+      "executor": "@nx/angular:webpack-server",
+      "options": {
+        "outputPath": "dist/apps/custom-theme/server",
+        "main": "apps/custom-theme/server.ts",
+        "tsConfig": "apps/custom-theme/tsconfig.server.json",
+        "customWebpackConfig": {
+          "path": "apps/custom-theme/webpack.server.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "media"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "sourceMap": true,
+          "extractLicenses": false,
+          "vendorChunk": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve-ssr": {
+      "executor": "@nguniversal/builders:ssr-dev-server",
+      "configurations": {
+        "development": {
+          "browserTarget": "custom-theme:build:development",
+          "serverTarget": "custom-theme:server:development"
+        },
+        "production": {
+          "browserTarget": "custom-theme:build:production",
+          "serverTarget": "custom-theme:server:production"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4208
+      }
+    },
+    "prerender": {
+      "executor": "@nguniversal/builders:prerender",
+      "options": {
+        "routes": ["/"]
+      },
+      "configurations": {
+        "development": {
+          "browserTarget": "custom-theme:build:development",
+          "serverTarget": "custom-theme:server:development"
+        },
+        "production": {
+          "browserTarget": "custom-theme:build:production",
+          "serverTarget": "custom-theme:server:production"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "static-server": {
+      "dependsOn": ["build", "server"],
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "PORT=4208 node dist/apps/custom-theme/server/main.js"
+      }
+    }
+  }
+}

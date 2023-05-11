@@ -1,0 +1,168 @@
+{
+  "name": "custom-app-1",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "demo-workspace",
+  "sourceRoot": "apps/custom-app-1/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/custom-app-1/browser",
+        "index": "apps/custom-app-1/src/index.html",
+        "main": "apps/custom-app-1/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/custom-app-1/tsconfig.app.json",
+        "assets": [
+          "apps/custom-app-1/src/favicon.ico",
+          "apps/custom-app-1/src/assets"
+        ],
+        "styles": ["apps/custom-app-1/src/styles.css"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/custom-app-1/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/custom-app-1/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nx/angular:module-federation-dev-server",
+      "options": {
+        "port": 4200,
+        "publicHost": "http://localhost:4200"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "custom-app-1:build:production"
+        },
+        "development": {
+          "browserTarget": "custom-app-1:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "custom-app-1:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/custom-app-1/**/*.ts",
+          "apps/custom-app-1/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/custom-app-1/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "custom-app-1:build",
+        "port": 4200
+      }
+    },
+    "server": {
+      "dependsOn": ["build"],
+      "executor": "@nx/angular:webpack-server",
+      "options": {
+        "outputPath": "dist/apps/custom-app-1/server",
+        "main": "apps/custom-app-1/server.ts",
+        "tsConfig": "apps/custom-app-1/tsconfig.server.json",
+        "customWebpackConfig": {
+          "path": "apps/custom-app-1/webpack.server.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "media"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "sourceMap": true,
+          "extractLicenses": false,
+          "vendorChunk": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve-ssr": {
+      "executor": "@nx/angular:module-federation-dev-ssr",
+      "configurations": {
+        "development": {
+          "browserTarget": "custom-app-1:build:development",
+          "serverTarget": "custom-app-1:server:development"
+        },
+        "production": {
+          "browserTarget": "custom-app-1:build:production",
+          "serverTarget": "custom-app-1:server:production"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "prerender": {
+      "executor": "@nguniversal/builders:prerender",
+      "options": {
+        "routes": ["/"]
+      },
+      "configurations": {
+        "development": {
+          "browserTarget": "custom-app-1:build:development",
+          "serverTarget": "custom-app-1:server:development"
+        },
+        "production": {
+          "browserTarget": "custom-app-1:build:production",
+          "serverTarget": "custom-app-1:server:production"
+        }
+      },
+      "defaultConfiguration": "production"
+    }
+  }
+}
